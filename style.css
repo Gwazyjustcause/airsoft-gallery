@@ -32,3 +32,12 @@ footer{padding-top:18px;padding-bottom:18px;gap:12px}
 .faq a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 .footer-instagram{margin-left:auto;font-size:11px;color:var(--accent)}
 @media(max-width:500px){.topbar{padding-top:12px;padding-bottom:12px}.top-links{gap:16px}.archive{padding-top:16px}.section-heading h1{font-size:28px}.faq h2{font-size:25px}.footer-instagram{font-size:10px}}
+
+/* Short introduction above the album list. */
+.intro{margin:0 5%;padding:25px 0 21px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:24px}
+.intro-label{font-size:9px;font-weight:600;letter-spacing:1.8px;color:var(--accent);margin:0 0 8px}
+.intro h1{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;font-size:clamp(29px,3.4vw,42px);line-height:1.1;font-weight:600;margin:0}
+.intro h1 span{color:var(--accent)}
+.intro-copy{font-size:12px;line-height:1.6;color:var(--muted);margin:8px 0 0}
+.intro-link{font-size:11px;color:var(--accent);white-space:nowrap}
+@media(max-width:650px){.intro{padding:18px 0 17px;display:block}.intro h1{font-size:31px}.intro-link{display:inline-block;margin-top:12px}.intro-copy{font-size:11px}.top-links{gap:12px;flex-wrap:wrap;justify-content:flex-end}.topbar{gap:16px}}
