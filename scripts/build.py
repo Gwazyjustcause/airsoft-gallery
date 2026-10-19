@@ -21,12 +21,18 @@ def build():
         meta_path=folder/'album.json'
         meta=json.loads(meta_path.read_text('utf-8')) if meta_path.exists() else {}
         match=re.search(r'(20\d{2})[-_.](\d{2})[-_.](\d{2})',folder.name)
-        date=meta.get('date', '-'.join(match.groups()) if match else None)
+        parsed_date='-'.join(match.groups()) if match else None
+        if not match:
+            match=re.search(r'(\d{2})[-_.](\d{2})[-_.](20\d{2})',folder.name)
+            if match:
+                day,month,yr=match.groups()
+                parsed_date=f'{yr}-{month}-{day}'
+        date=meta.get('date', parsed_date)
         if date: datetime.strptime(date,'%Y-%m-%d')
         year=int(date[:4]) if date else next((int(p) for p in relative.parts if re.fullmatch(r'20\d{2}',p)),now.year)
         deadline=datetime(year+1,2,calendar.monthrange(year+1,2)[1],23,59,59,tzinfo=ZoneInfo('Europe/Lisbon'))
         if now>deadline or year>now.year: continue
-        title=meta.get('title') or (folder.name[match.end():].strip(' -_') if match else folder.name).replace('_',' ')
+        title=meta.get('title') or (folder.name[match.end():].strip(' -_') if match else folder.name).replace('_',' ').replace('-',' ')
         items=[]
         for p in photos:
             dest=OUT/p.relative_to(ROOT);dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(p,dest)
