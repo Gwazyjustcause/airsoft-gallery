@@ -15,3 +15,20 @@
 .empty p{margin:0}
 footer{padding-top:18px;padding-bottom:18px;gap:12px}
 @media(max-width:500px){.hero{padding-top:20px;padding-bottom:15px}.hero h1{font-size:32px}.archive{padding-top:20px;padding-bottom:28px}.section-heading h2{font-size:28px}.notice{padding:9px 12px}}
+
+/* Direct access to albums, without an introductory hero. */
+.topbar{padding-top:14px;padding-bottom:14px}
+.top-links{display:flex;align-items:center;gap:24px}
+.archive{padding-top:20px;padding-bottom:22px}
+.section-heading h1{font-family:'Barlow Condensed',sans-serif;font-size:30px;line-height:1.1;margin:0;text-transform:uppercase}
+.section-heading h1 span,.faq h2 span{color:var(--accent)}
+.filters{margin:12px 0 18px}
+.faq{margin:0 5% 26px;padding-top:20px;border-top:1px solid var(--line);scroll-margin-top:20px}
+.faq h2{font-family:'Barlow Condensed',sans-serif;font-size:27px;text-transform:uppercase;margin:0 0 12px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font-size:12px;padding:15px 0;line-height:1.5}
+.faq summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.faq p{font-size:12px;line-height:1.8;color:var(--muted);margin:0 0 16px;max-width:760px}
+.faq a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.footer-instagram{margin-left:auto;font-size:11px;color:var(--accent)}
+@media(max-width:500px){.topbar{padding-top:12px;padding-bottom:12px}.top-links{gap:16px}.archive{padding-top:16px}.section-heading h1{font-size:28px}.faq h2{font-size:25px}.footer-instagram{font-size:10px}}

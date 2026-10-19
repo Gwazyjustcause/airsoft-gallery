@@ -2,7 +2,7 @@
 const $=id=>document.getElementById(id);
 let albums=[],active=null,photoIndex=0,zipBusy=false;
 const nowYear=new Date().getFullYear();
-$('hero-year').textContent=nowYear;$('footer-year').textContent=nowYear;
+$('footer-year').textContent=nowYear;
 const fmt=date=>date?new Intl.DateTimeFormat('pt-PT',{day:'2-digit',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(date+'T12:00:00Z')):'';
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
 function render(){
