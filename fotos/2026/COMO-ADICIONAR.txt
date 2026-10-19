@@ -1,0 +1,6 @@
+Cria aqui uma pasta por jogo, por exemplo:
+2026-10-18 - Nome do jogo
+
+Carrega as fotografias dentro dessa pasta.
+O álbum aparece automaticamente após a publicação.
+Consulta o README na raiz para opções de nome, campo e capa.
