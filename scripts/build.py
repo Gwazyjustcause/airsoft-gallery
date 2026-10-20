@@ -13,7 +13,7 @@ def build():
     now=datetime.now(ZoneInfo('Europe/Lisbon'))
     if OUT.exists(): shutil.rmtree(OUT)
     OUT.mkdir()
-    for name in ('index.html','style.css','app.js'): shutil.copy2(ROOT/name,OUT/name)
+    for name in ('index.html','style.css','app.js','sitemap.xml'): shutil.copy2(ROOT/name,OUT/name)
     albums=[]
     folders={p.parent for p in ROOT.rglob('*') if p.is_file() and p.suffix.lower() in EXT and not any(s.startswith('.') or s in ('dist','node_modules','scripts') for s in p.relative_to(ROOT).parts)}
     for folder in sorted(folders):
