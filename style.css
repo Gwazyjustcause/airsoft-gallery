@@ -41,3 +41,5 @@ footer{padding-top:18px;padding-bottom:18px;gap:12px}
 .intro-copy{font-size:12px;line-height:1.6;color:var(--muted);margin:8px 0 0}
 .intro-link{font-size:11px;color:var(--accent);white-space:nowrap}
 @media(max-width:650px){.intro{padding:18px 0 17px;display:block}.intro h1{font-size:31px}.intro-link{display:inline-block;margin-top:12px}.intro-copy{font-size:11px}.top-links{gap:12px;flex-wrap:wrap;justify-content:flex-end}.topbar{gap:16px}}
+
+.photo{content-visibility:auto;contain-intrinsic-size:auto 220px}

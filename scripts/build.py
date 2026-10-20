@@ -1,9 +1,10 @@
-"""Build the static gallery from image folders; no third-party dependencies."""
+"""Build the static gallery from image folders; Pillow generates lightweight display images."""
 from pathlib import Path
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from urllib.parse import quote
-import re, json, shutil, calendar
+import re, json, shutil, calendar, hashlib
+from PIL import Image, ImageOps
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'dist'
 EXT={'.jpg','.jpeg','.png','.webp','.avif'}
@@ -36,8 +37,19 @@ def build():
         items=[]
         for p in photos:
             dest=OUT/p.relative_to(ROOT);dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(p,dest)
-            items.append({'src':quote(p.relative_to(ROOT).as_posix(),safe='/'),'name':p.name})
-        cover=next((p['src'] for p in items if p['name']==meta.get('cover')),items[0]['src'])
+            key=hashlib.sha256(p.relative_to(ROOT).as_posix().encode()).hexdigest()[:20]
+            media=OUT/'media';media.mkdir(exist_ok=True)
+            with Image.open(p) as source:
+                display=ImageOps.exif_transpose(source).convert('RGB')
+                width,height=display.size
+                thumb=display.copy();thumb.thumbnail((640,640))
+                thumb.save(media/f'{key}-thumb.webp','WEBP',quality=76,method=4)
+                display.thumbnail((1920,1920))
+                display.save(media/f'{key}-view.webp','WEBP',quality=85,method=4)
+            items.append({'src':quote(p.relative_to(ROOT).as_posix(),safe='/'),'name':p.name,
+                          'thumb':f'media/{key}-thumb.webp','preview':f'media/{key}-view.webp',
+                          'width':width,'height':height})
+        cover=next((p['thumb'] for p in items if p['name']==meta.get('cover')),items[0]['thumb'])
         albums.append({'id':relative.as_posix(),'title':title or 'Jogo de airsoft','location':meta.get('location',''),'date':date,'year':year,'cover':cover,'photos':items})
     (OUT/'albums.json').write_text(json.dumps(albums,ensure_ascii=False,indent=2),'utf-8')
     size=sum(p.stat().st_size for p in OUT.rglob('*') if p.is_file())
